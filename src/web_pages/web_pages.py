@@ -1,6 +1,5 @@
 import datetime
 import pandas as pd
-from src.API import conversion
 from pandas.core.interchange.dataframe_protocol import DataFrame
 import re
 import os
@@ -58,7 +57,52 @@ def hello_user()->str:
 #     return transaction_list
 
 
-def card_number(df:DataFrame)->str:
+
+
+def card_numder(df:DataFrame)-> list:
+    """Функция, которая возвращает номера карт без повторов"""
+    card_list=[]
+    for i in df:
+        card_list.append(i["card number"])
+    filter_list=[]
+    for card in card_list:
+        if card not in filter_list and card != "nan":
+            filter_list.append(card)
+    return filter_list
+# filter list =['*7197', '*5091', nan, '*4556', '*1112', '*5507', '*6002', '*5441']
+
+
+# Напишем функцию, которая будет считать траты и кэшбек для каждой карты
+
+def card_namber_sum (df:DataFrame, filter_list:list)-> list:
+    sum_dict ={}
+    sum= 0
+    sum_payment_amount_list = []
+    for i in df:
+        if i["transaction currency"] == "RUB":
+            if i["card number"] == filter_list[0]:
+                sum_payment_amount_list.append(i["amount of the operation with rounding"])
+    for sum1 in sum_payment_amount_list:
+        sum +=sum1
+
+    dict_sum={filter_list[0]: round(sum,1)}
+    return dict_sum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def sum (df:DataFrame)->str:
     sum_payment_amount = 0
     cashback = sum_payment_amount/100
     sum_payment_amount_list=[]

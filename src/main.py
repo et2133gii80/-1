@@ -1,4 +1,4 @@
-from src.web_pages.web_pages import card_number
+from src.web_pages.web_pages import card_numder, card_namber_sum
 from src.web_pages.excel_file_import import read_xlsx
 import os
 
@@ -10,7 +10,10 @@ excel_file_path = os.path.abspath(rel_excel_file_path)
 
 def main():
     df= read_xlsx(excel_file_path)
-    print(card_number(df))
+    filter_list=card_numder(df)
+    print(card_namber_sum(df, filter_list))
+
+
 
 if __name__ =="__main__":
     main()
