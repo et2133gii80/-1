@@ -33,6 +33,7 @@ def range_time(date: str, mouth: int = 1) -> list:
 
         return date_list
 
+
 def spending_by_category(df: DataFrame, category: str, date: str = date_now):
     list_time = range_time(date, 3)
     amount_list=[]
